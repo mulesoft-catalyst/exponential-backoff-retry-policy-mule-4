@@ -1,0 +1,69 @@
+id: exponential-backoff-policy-mule-4
+name: exponential-backoff-policy-mule-4
+description: |
+            A custom policy to implement a lightweight Exponential Backoff Retry pattern. Increases the back off period for each retry attempt. When the interval has reached the max interval, it is no longer increased. 
+            Stops retrying once the max elapsed time has been reached.
+category: Custom
+type: custom
+resourceLevelSupported: true
+encryptionSupported: false
+standalone: true
+requiredCharacteristics: []
+providedCharacteristics: []
+configuration:
+  - propertyName: default_initial_interval
+    name: Default Initial Interval (miliseconds)
+    description: The default initial interval
+    type: int
+    minimumValue: 1 
+    maximumValue: 600000
+    defaultValue: 2000
+  - propertyName: default_max_elapsed_time
+    name: Default Maximum Elapsed Time (miliseconds)
+    description: The default maximum elapsed time
+    type: int
+    minimumValue: 1 
+    maximumValue: 600000
+    defaultValue: 120000
+  - propertyName: default_max_interval
+    name: Default Maximum Backoff Time (miliseconds)
+    description: When the interval has reached the max interval, it is no longer increased
+    type: int
+    minimumValue: 1 
+    maximumValue: 600000
+    defaultValue: 30000
+  - propertyName: default_multiplier
+    name: Default Multiplier
+    description: The default multiplier
+    type: string
+    defaultValue: "1.5"  
+  - propertyName: evaluateAcceptanceExpressions
+    name: Evaluate accepted expressions (successful)
+    description: Use this to evaluate if a condition was met. If the condition wasn't met, then it will trigger the exponential backoff
+    type: boolean
+    optional: true
+    defaultValue: false    
+  - propertyName: responseAcceptanceConditions
+    name: Response Acceptance Conditions
+    description: Dataweave expression that will be evaluated to define if the request was successful or we need to trigger the exp backoff.
+    type: expression
+    optional: true
+    sensitive: false
+    allowMultiple: false
+    dependsOnKey: evaluateAcceptanceExpressions
+    dependsOnValue: true
+  - propertyName: evaluateErrorExpressions
+    name: Evaluate error expressions
+    description: Use this to evaluate if a condition was met. If the condition was met, then it will trigger the exponential backoff
+    type: boolean
+    optional: true
+    defaultValue: false    
+  - propertyName: responseErrorConditions
+    name: Response Error Conditions
+    description: Dataweave expression that will be evaluated to define if the request was successful or we need to trigger the exp backoff.
+    type: expression
+    optional: true
+    sensitive: false
+    allowMultiple: false
+    dependsOnKey: evaluateErrorExpressions
+    dependsOnValue: true

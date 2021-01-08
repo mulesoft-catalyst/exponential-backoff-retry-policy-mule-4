@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http-policy="http://www.mulesoft.org/schema/mule/http-policy"
+      xmlns:http-transform="http://www.mulesoft.org/schema/mule/http-policy-transform"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/http-policy http://www.mulesoft.org/schema/mule/http-policy/current/mule-http-policy.xsd
+               http://www.mulesoft.org/schema/mule/http-policy-transform http://www.mulesoft.org/schema/mule/http-policy-transform/current/mule-http-policy-transform.xsd">
+
+        <http-policy:proxy name="{{{policyId}}}-custom-policy">
+        <http-policy:source>
+            <set-variable variableName="hasErrors" value='#[null]'/>
+            <set-variable variableName="loopSize" value='#[ceil({{{default_max_elapsed_time}}}/1000/{{{default_multiplier}}})]'/>
+            <set-variable variableName="waitTime" value='#[{{{default_initial_interval}}}]'/>
+            <logger level="DEBUG" message='#["Retries LoopSize is:" ++ vars.loopSize]' category="com.mule.policies.exponentialBackoff"/>
+            <foreach collection="#[1 to vars.loopSize]">
+              <choice>
+                <when expression="#[isEmpty(vars.hasErrors) or vars.hasErrors]">
+                    <choice>
+                      <when expression="#[vars.hasErrors]">
+                        <logger level="DEBUG" message='#["An error was detected, waiting " ++ vars.waitTime ++ " ms before retrying execution"]' category="com.mule.policies.exponentialBackoff"/>
+                        <set-variable variableName="sleeping" value='#[%dw 2.0 import * from dw::Runtime output application/java --- wait(vars.waitTime, vars.waitTime)]'/>
+                      </when>  
+                    </choice>  
+                    <try>
+                      <http-policy:execute-next/>
+                      <!--  Flagging the execution to not calling again the downstream API -->
+                      <set-variable variableName="hasErrors" value='#[false]'/>
+                      <set-variable variableName="finalRetriedPayload" value='#[payload]'/>
+                      <error-handler >
+                        <on-error-continue logException="true" >
+                          <!--  Flagging the execution to call again the downstream API -->
+                          <set-variable variableName="hasErrors" value='#[true]'/>
+                          <!--  Recalculating the wait time based on the accumulated value  -->
+                          <set-variable variableName="waitTime" value='#[vars.waitTime*{{{default_multiplier}}}]'/>
+                        </on-error-continue>  
+                      </error-handler>  
+                    </try>  
+                </when>
+              </choice>                
+            </foreach>
+            <set-payload value='#[vars.finalRetriedPayload]'/>
+        </http-policy:source>
+    </http-policy:proxy>
+</mule>
