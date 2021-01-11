@@ -1,7 +1,8 @@
-id: exponential-backoff-policy-mule-4
-name: exponential-backoff-policy-mule-4
+id: Exponential Backoff Retry
+name: Exponential Backoff Retry
 description: |
-            A custom policy to implement a lightweight Exponential Backoff Retry pattern. Increases the back off period for each retry attempt. When the interval has reached the max interval, it is no longer increased. 
+            A custom policy to implement an Exponential Backoff Retry pattern. 
+            Increases the back off period for each retry attempt. When the interval has reached the max interval, it is no longer increased. 
             Stops retrying once the max elapsed time has been reached.
 category: Custom
 type: custom
