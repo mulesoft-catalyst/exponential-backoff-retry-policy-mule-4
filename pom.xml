@@ -6,10 +6,10 @@
 
     <groupId>9033ff23-884a-4352-b75b-14fc8237b2c4</groupId>
     <artifactId>exponential-backoff-retry-mule-4</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
-    <name>exponential-backoff-retry-mule-4</name>
-    <description>A custom policy to implement a lightweight Exponential Backoff Retry pattern. Increases the back off period for each retry attempt. When the interval has reached the max interval, it is no longer increased. </description>
+    <name>Exponential Backoff Retry Policy</name>
+    <description>A custom policy to implement a Exponential Backoff Retry algorithm. Increases the back off period for each retry attempt. When the interval has reached the max interval, it is no longer increased. Stops retrying once the max elapsed time has been reached.</description>
 
     <packaging>mule-policy</packaging>
 
