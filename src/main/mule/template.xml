@@ -10,6 +10,7 @@
             <set-variable variableName="hasErrors" value='#[null]'/>
             <set-variable variableName="loopSize" value='#[ceil({{{default_max_elapsed_time}}}/1000/{{{default_multiplier}}})]'/>
             <set-variable variableName="waitTime" value='#[{{{default_initial_interval}}}]'/>
+            <set-variable variableName="counter" value='#[1]'/>
             <logger level="DEBUG" message='#["Retries LoopSize is:" ++ vars.loopSize]' category="com.mule.policies.exponentialBackoff"/>
             <foreach collection="#[1 to vars.loopSize]">
               <choice>
@@ -30,7 +31,8 @@
                           <!--  Flagging the execution to call again the downstream API -->
                           <set-variable variableName="hasErrors" value='#[true]'/>
                           <!--  Recalculating the wait time based on the accumulated value  -->
-                          <set-variable variableName="waitTime" value='#[vars.waitTime*{{{default_multiplier}}}]'/>
+                          <set-variable variableName="waitTime" value='#[if(vars.counter==1) vars.waitTime else if(vars.waitTime*{{{default_multiplier}}} > {{{default_max_interval}}}) {{{default_max_interval}}} else vars.waitTime*{{{default_multiplier}}}]'/>
+                          <set-variable variableName="counter" value='#[vars.counter+1]'/>
                         </on-error-continue>  
                       </error-handler>  
                     </try>  
