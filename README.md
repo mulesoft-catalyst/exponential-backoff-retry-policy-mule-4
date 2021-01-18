@@ -76,7 +76,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Avg  | Median | Min | Max | Error Rate | Throughput |
-| ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ |
 | 398 ms | 378 ms | 349 ms | 1410 ms | %46.50 | 4.9/sec |
 
 #### Test #1
@@ -96,7 +96,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput |
-| ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 7 | 7813 ms | 3391 ms | 369 ms | 41822 ms | %00.00 | 15.1/min |
 
 
@@ -117,7 +117,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput |
-| ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 7 | 4584 ms | 2416 ms | 369 ms | 39133 ms | %00.00 | 25.4/min |
 
 #### Test #3
@@ -137,7 +137,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput |
-| ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 7 | 2019 ms | 1120 ms | 367 ms | 20428 ms | %00.00 | 55.4/min |
 
 #### Test #4
@@ -157,7 +157,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput |
-| ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 400 | 3579 ms | 1572 ms | 365 ms | 37890 ms | %00.00 | 32.6/min |
 
 #### Test #5
@@ -177,7 +177,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput | 95% percentile |
-| ------ | ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 400 | 2772 ms | 1385 ms | 361 ms | 299453 ms | %00.20 | 21.6/min | 5615 |
 
 #### Test #6
@@ -197,7 +197,7 @@ The policy has been tested using a Mule application that returns error or ok at 
 ##### Results
 
 | Loop Size | Avg  | Median | Min | Max | Error Rate | Throughput | 95% percentile |
-| ------ | ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 400 | 1953 ms | 479 ms | 365 ms | 49785 ms | %00.00 | 30.7/min | 5220 |
 
 ### Contribution
