@@ -206,7 +206,7 @@ Want to contribute? Great!
 
 * For public contributions - Just fork the repo, make your updates and open a pull request!
 * For internal contributions - Use a simplified feature workflow following these steps:
-   - Clone your repo
+   - Clone the repo
    - Create a feature branch using the naming convention feature/name-of-the-feature
    - Once it's ready, push your changes
    - Open a pull request for a review
