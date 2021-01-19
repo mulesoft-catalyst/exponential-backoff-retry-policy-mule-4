@@ -50,7 +50,7 @@ The following commands are required during development phase
 | Task | Command |
 | ------ | ------ |
 | Package policy| mvn clean install |
-| Publish to Exchange | mvn deploy |
+| Publish to Exchange | mvn deploy - Make sure to update the pom.xml file with your org ID - |
 
 ### Limitations
 This policy makes use of the for-each module. Since there is no break condition to exit the loop, this policy iterates through all the objects in the array (please see "How?" Section). This means that it is convenient to apply this policy with small values ​​of intervals and elapsed time, to keep the loop fast to iterate (please see Benchmark section below). Of course, the current logic could be replaced with custom code (java module, script execution). It is up to the user to implement it. Just keep in mind that one of the main motivations for this policy is not to have too many dependencies.
